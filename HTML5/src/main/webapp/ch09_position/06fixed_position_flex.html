@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>position 사용하기(fixed position) 및 flex 사용하기</title>
+
+<style type="text/css">
+	
+	body{
+		border: solid 1px gray;
+		width: 80%;
+		margin: 0 auto;
+	}
+	
+	div#container {
+		border: solid 1px red;
+		width: 80%;
+		margin: 0 auto;
+	}
+	
+	div#parent, div#other {
+		border: solid 2px green;
+		margin: 10px;
+	}
+	
+	div#parent {
+		width: 50%;
+		background-color: #ffcccc;
+	}
+	
+	div.me {
+		background-color: yellow;
+	}
+	
+	div.you {
+		background-color: cyan;
+	}
+	
+    
+	/*
+		>>>> !!! div 에 세로 정렬을 시키려면 !!! <<<<
+		div 의 display 를 flex 로 하고, flex item 에서 margin: auto; 로 지정해주면 된다.
+	*/
+    div#div_flex {
+        display: flex;
+        
+        position: fixed;
+    	top: 600px;
+    	left: 1370px;
+    	
+    	width: 80px;
+    	height: 80px;
+    	background-color: navy;
+    	border-radius: 50%;  /* 절반씩 깍음 */ 
+    }
+    
+    div#div_flex a {
+    	text-decoration: none;
+    	margin: auto;
+    }
+    
+    div#div_flex a:link, div#div_flex a:visited, div#div_flex a:active {
+    	color: white;  
+	 /* a:link    : 방문 전 링크 상태이다.
+	    a:visited : 방문 후 링크 상태이다.
+		a:hover   : 마우스 오버 했을 때 링크 상태이다.
+		a:active  : 클릭 했을 때 링크 상태이다.
+	 */
+    }
+    
+    
+
+</style>
+
+</head>
+<body>
+	<div id="container">
+		
+		<div id="parent">
+			parent(부모)<br/>
+			parent(부모)<br/>
+			parent(부모)<br/>
+			<div class="me">
+			  첫번째 me(나)는 position: static;으로 했으므로 top: 200px; left: 200px; 으로 위치값을 줘봐야 엘리먼트의 위치값은 변하지 않으며 크기(width)를 따로 지정하지 않았으므로 부모 엘리먼트(요소)의 크기(width)를 따라간다.<br/>  
+			  첫번째 me(나)는 position: static;으로 했으므로 top: 200px; left: 200px; 으로 위치값을 줘봐야 엘리먼트의 위치값은 변하지 않으며 크기(width)를 따로 지정하지 않았으므로 부모 엘리먼트(요소)의 크기(width)를 따라간다.<br/>
+			  첫번째 me(나)는 position: static;으로 했으므로 top: 200px; left: 200px; 으로 위치값을 줘봐야 엘리먼트의 위치값은 변하지 않으며 크기(width)를 따로 지정하지 않았으므로 부모 엘리먼트(요소)의 크기(width)를 따라간다.<br/>  
+			</div>
+		</div>
+		
+		<div class="you">
+		  두번째 me(나)는 position: static;으로 했으므로 top: 200px; left: 200px; 으로 위치값을 줘봐야 엘리먼트의 위치값은 변하지 않으며 크기(width)를 따로 지정하지 않았으므로 부모 엘리먼트(요소)의 크기(width)를 따라간다.<br/>
+		  두번째 me(나)는 position: static;으로 했으므로 top: 200px; left: 200px; 으로 위치값을 줘봐야 엘리먼트의 위치값은 변하지 않으며 크기(width)를 따로 지정하지 않았으므로 부모 엘리먼트(요소)의 크기(width)를 따라간다.<br/>
+		</div>
+		
+		<div id="other">
+			other(기타 다른 것들)<br/>
+			other(기타 다른 것들)<br/>
+			other(기타 다른 것들)<br/>
+			other(기타 다른 것들)<br/>
+			other(기타 다른 것들)<br/>
+			other(기타 다른 것들)<br/>
+			other(기타 다른 것들)<br/>
+			other(기타 다른 것들)<br/>
+			other(기타 다른 것들)<br/>
+			other(기타 다른 것들)<br/>
+			other(기타 다른 것들)<br/>
+			other(기타 다른 것들)<br/>
+			other(기타 다른 것들)<br/>
+			other(기타 다른 것들)<br/>
+			other(기타 다른 것들)<br/>
+			other(기타 다른 것들)<br/>
+			other(기타 다른 것들)<br/>
+			other(기타 다른 것들)<br/>
+			other(기타 다른 것들)<br/>
+			other(기타 다른 것들)<br/>
+			other(기타 다른 것들)<br/>
+			other(기타 다른 것들)<br/>
+			other(기타 다른 것들)<br/>
+			other(기타 다른 것들)<br/>
+			other(기타 다른 것들)<br/>
+			other(기타 다른 것들)<br/>
+			other(기타 다른 것들)<br/>
+			other(기타 다른 것들)<br/>
+			other(기타 다른 것들)<br/>
+			other(기타 다른 것들)<br/>
+			other(기타 다른 것들)<br/>
+			other(기타 다른 것들)<br/>
+			other(기타 다른 것들)<br/>
+			other(기타 다른 것들)<br/>
+			other(기타 다른 것들)<br/>
+			other(기타 다른 것들)<br/>
+			other(기타 다른 것들)<br/>
+			other(기타 다른 것들)<br/>
+			other(기타 다른 것들)<br/>
+			other(기타 다른 것들)<br/>
+			other(기타 다른 것들)<br/>
+			other(기타 다른 것들)<br/>
+			other(기타 다른 것들)<br/>
+			other(기타 다른 것들)<br/>
+			other(기타 다른 것들)<br/>
+			other(기타 다른 것들)<br/>
+			other(기타 다른 것들)<br/>
+			other(기타 다른 것들)<br/>
+		</div>
+		
+		<div id="div_flex">
+		   <a href="#">맨위로</a>
+		</div>
+		
+	</div>
+</body>
+</html>

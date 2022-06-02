@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>자바스크립트 object 에 대해서 알아봅니다.</title>
+</head>
+<body>
+
+<h2>자바스크립트 object 에 대해서 알아봅니다.</h2>
+
+<div id="view-1"></div>
+<div id="view-2"></div>
+<div id="view-3"></div>
+<div id="view-4"></div>
+
+<script type="text/javascript">
+
+	const member1 = {
+			id		: "leess",
+			passwd	: "qwer1234$",
+			name	: "이순신",
+			address	: "서울시 마포구",
+			mobile	: "010-2435-6789",
+			info1	: function() {
+				return this.id + " " + this.name + " " + this.address;
+			},
+			info2() { // ECMAScript 6 에서는 속성값이 함수이면 function 키워드 없이 함수명만 적으면 딘다.
+				return this.id + " " + this.name + " " + this.address;
+			}
+			
+	};
+
+	document.getElementById("view-1").innerHTML = member1.info1;
+	// function() { this.id + " " + this.name + " " + this.address; }
+	document.getElementById("view-2").innerHTML = member1.info1();
+	// leess 이순신 서울시 마포구
+	
+	//  member1 = {};
+	// Uncaught TypeError: Assignment to constant variable.
+	
+	/* member1 의 형태가 const 이므로 member1 의 객체를 다른 객체로 변경할 수 없는 것이지
+      member1 의 객체의 필드값은 변경이 가능하다. */
+	member1.id = "eomjh";
+	member1.name = "엄정화";
+	member1.address = "경기도 군포시"
+	document.getElementById("view-3").innerHTML = member1.info1;
+	document.getElementById("view-4").innerHTML = member1.info2();
+
+</script>
+
+</body>
+</html>

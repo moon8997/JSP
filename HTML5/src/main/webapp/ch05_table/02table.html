@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>테이블 만들기 2[테이블캡션(설명)넣기]</title>
+
+<style type="text/css">
+
+	div#container {
+		/* border: solid 1px gray; */
+		width: 40%;
+		margin: 50px auto;
+	}
+
+	div#container > table {
+		width: 100%;
+		margin-bottom: 30px;
+	}
+	
+	table, th, td {
+		border: solid 1px #fcb558;
+		border-collapse: collapse;
+	}
+
+	th{
+		height: 30px;
+		background-color: #ccc;
+	}
+	
+	td{
+		height: 25px;
+	}
+	
+	td.mycenter{
+		text-align: center;
+	}
+	
+	td.myright{
+		text-align: right;
+	}
+</style>
+
+</head>
+<body>
+
+	<div id="container">
+		<table>
+			<caption>&lt;테이블1&gt; 테이블에 대한 설명문구1</caption>
+			<thead>
+				<tr>
+					<th width="50%">제품이름과 설명</th>
+					<th width="25%">개당 가격</th>
+					<th width="25%">박스당 개수</th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<tr>
+					<td class="mycenter">블라우스 = 붉은색 실크</td>
+					<td class="myright">20,000원</td>
+					<td class="mycenter">150</td>
+				</tr>
+				
+				<tr>
+					<td class="mycenter">바지 = 검은색 원단</td>
+					<td class="myright">4,000원</td>
+					<td class="mycenter">300</td>
+				</tr>
+			</tbody>
+		</table>
+		
+		
+		<table>
+			<caption >&lt;테이블2&gt; 테이블에 대한 설명문구</caption>
+			<thead>
+				<tr>
+					<th width="50%">제품이름과 설명</th>
+					<th width="25%">개당 가격</th>
+					<th width="25%">박스당 개수</th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<tr>
+					<td class="mycenter">블라우스 = 붉은색 실크</td>
+					<td class="myright">20,000원</td>
+					<td class="mycenter">150</td>
+				</tr>
+				
+				<tr>
+					<td class="mycenter">바지 = 검은색 원단</td>
+					<td class="myright">4,000원</td>
+					<td class="mycenter">300</td>
+				</tr>
+			</tbody>
+		</table>
+		
+		
+	</div>
+	
+</body>
+</html>

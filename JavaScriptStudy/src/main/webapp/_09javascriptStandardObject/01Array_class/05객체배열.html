@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<style type="text/css">
+
+	table {
+		float: left;
+		border: solid 1px gray;
+		width: 300px;
+		min-height: 250px;
+		margin: 20px;
+	}
+	
+	table td.title {
+		color: blue;
+		font-weight: bold; 
+	}
+	
+	table td.center {
+		text-align: center;
+	}
+	
+	table td.special {
+		color: red;
+		font-weight: bold;
+	} 
+
+</style>
+
+<script type="text/javascript">
+	
+	window.onload = function(){
+		
+		const arrPerson = [{name:"아이유", photo:"iyou.jpg",   age:28, address:"서울시 강동구", special:"가수 겸 탤런트<br/>팬들이 많음"}         
+                          ,{name:"김태희", photo:"kimth.jpg",  age:27, address:"서울시 강서구", special:"탤런트<br/>팬들이 많음"}
+                          ,{name:"박보영", photo:"parkby.jpg", age:26, address:"서울시 강남구", special:"탤런트 및 영화배우<br/>팬들이 많음"}];
+		
+		const btn_show  = document.querySelector("button#show");
+		const btn_hide1 = document.querySelector("button#hide1");
+		const btn_hide2 = document.querySelector("button#hide2");
+		
+		const div_display = document.querySelector("div#display");
+		
+		let html = ``;
+		
+	//	arrPerson.forEach( function(item, index, array) { } );
+		
+		arrPerson.forEach( item => {
+			                   html += `<table>
+			                               <tr>
+			                                  <td rowspan='3'><img src='images/${item.photo}' /></td>
+			                                  <td class='title'>성명</td>
+			                                  <td>${item.name}</td>
+			                               </tr>
+			                               <tr>
+			                                  <td class='title'>나이</td>
+			                                  <td>${item.age}</td>
+			                               </tr>
+			                               <tr>
+			                                  <td class='title'>주소</td>
+			                                  <td>${item.address}</td>
+			                               </tr>
+			                               <tr>
+			                                  <td colspan='3' class='center special'>특이사항</td>
+			                               </tr>
+			                               <tr>
+			                                  <td colspan='3' class='center'>${item.special}</td>
+			                               </tr>
+			                            </table>`;             
+		                 });
+		
+		
+		btn_show.addEventListener('click', () => {
+		//	div_display.style.display = "block";
+		//  또는
+		    div_display.style.display = "";  // div_display.style.display 에 설정된 display 의 값인 block 으로 하겠다는 말이다. 
+		
+			div_display.innerHTML = `${html}`;
+		});
+		
+		btn_hide1.addEventListener('click', () => {
+			div_display.innerHTML = ``;
+		});
+		
+		btn_hide2.addEventListener('click', () => {
+			div_display.style.display = "none";
+		});
+		
+	}
+	
+</script>
+
+</head>
+<body>
+
+	<div>
+		<button type="button" id="show">보이기</button>
+		<button type="button" id="hide1">감추기1</button>
+		<button type="button" id="hide2">감추기2</button>		
+	</div>
+    <div id="display"></div>
+</body>
+
+</html>

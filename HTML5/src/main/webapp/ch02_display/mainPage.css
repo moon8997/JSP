@@ -1,0 +1,65 @@
+@charset "UTF-8";
+
+body{
+	font-family: Arial, "MS Trebuchet", sans-serif;
+	
+	border: solid 0px gray;
+	
+	/* === 여백 설정 === */
+	/* == margin 은 바깥여백이다. == */
+
+/*	margin: 100px 100px 50px 20px;	/* 상 우 하 좌		시계방향 */
+/*	margin: 50px;					/* 상 우 하 좌	 모든 바깥여백을 50px; 을 준것이다.	시계방향 */
+/*	margin:	100px 50px;				/* 상 하는 바깥여백을 100px;을 주고 좌우는 바깥여백을 50px;을 준것이다. 시계방향 */
+
+	margin: 0;						/* 상 우 하 좌 모두 바깥여백을 0px; 을 준것이다. 즉, 바깥여백을 없게 한다. */
+
+	/* == padding 은 안쪽여백이다. == */
+/*	padding: 100px 100px 50px 20px;	/* 상 우 하 좌		시계방향 */
+/*	padding: 50px;					/* 상 우 하 좌	 모든 안쪽여백을 50px; 을 준것이다.	시계방향 */
+/*	padding: 100px 50px;			/* 상 하는 안쪽여백을 100px;을 주고 좌우는 바깥여백을 50px;을 준것이다. 시계방향 */
+
+	padding: 0;	
+
+}
+
+div#container {
+	border: solid 0px navy; 
+	width: 80%;
+	margin: 20px auto;
+}
+
+div#header {
+	border: solid 0px red;
+	height: 100px;
+	background-color: #ccc;	/*  #ccc; 는 #cccccc; 이다. */
+	margin-top: 50px; /* margin: 50px 0 0 0; 와 같은것이다. */
+	/* width: 100%; */
+}
+
+div#side {
+	border: solid 0px green;
+	/* display: inline-block;
+	height: 600px; */
+	width: 30%;
+	background-color: #888;
+}
+
+div#contents {
+	border: solid 0px blue;
+	/* display: inline-block;
+	height: 600px; */
+	width: 69.3%;
+	background-color: #eee;
+}
+
+div#footer {
+	border: solid 0px red;
+	height: 80px;
+	background-color: #ddd;
+}
+
+.customDisplay{
+	display: inline-block;
+	height: 400px;
+}

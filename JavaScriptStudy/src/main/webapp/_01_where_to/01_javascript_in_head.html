@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>스크립트 태그는 head 태그내에 위치해도 됩니다.</title>
+
+<script type="text/javascript">
+
+	function myfunction() {
+		document.getElementById("demo").innerHTML = "p태그의 내용이 변경되었습니다."	/* 대소문자구분! */
+	}
+	
+</script>
+
+</head>
+<body>
+
+<h2>스크립트 태그는 head 태그내에 위치해도 됩니다.</h2>
+
+<p id="demo">변경전 p태그</p>
+	<!-- <button type="button" onclick="javascript:myfunction()">클릭하세요</button> -->
+	<!-- javascript; 는 생략 가능하므로 또는 -->
+	<button type="button" onclick="myfunction()">클릭하세요</button>
+</body>
+</html>

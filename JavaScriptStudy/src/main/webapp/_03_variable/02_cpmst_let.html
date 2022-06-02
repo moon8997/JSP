@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JavaScript 에서 변수 선언시 사용되는 var, const, left 에 대해서 알아보기</title>
+</head>
+<body>
+
+<h1>var 사용하기</h1>
+<h2>더하기 계산하기</h2>
+<input type="text" id="num1" /> + <input type="text" id="num2" /> = <span id="sum"></span>
+<br/><br/>
+<button type="button" onclick="myFunction_1()">잘못된 더하기 결과보기</button>
+<button type="button" onclick="myFunction_2()">올바른 더하기 결과보기</button>
+
+<hr style="height: 2px; background-color: goldl; border: none;">
+
+<h2>빼기 계산하기</h2>
+
+<input type="text" id="num3" /> - <input type="text" id="num4" /> = <span id="minus"></span>
+<br/><br/>
+<button type="button" onclick="myFunction_3()">올바른 빼기 결과보기</button>
+
+<hr style="height: 2px; background-color: goldl; border: none;">
+
+<p id="greeting"></p>
+<p id="float"></p>
+<p id="point"></p>
+<p id="view-1"></p>
+<p id="view-2"></p>
+
+
+<script type="text/javascript">
+/*
+	1995년 부터 2015년 까지는 모든 JavaScript 코드에서 변수 선언시 var 를 사용하였음.
+	2015년 이후 부터 JavaScript 코드에서 변수 선언시 사용되는 const 와 let 가 추가 되었음. 
+	
+	※ ES6(ECMAScript 6) 
+	==> ES6이란? ECMA라는 정보와 통신 시스템을 위한 국제적 표준화 기구에서 만든 ECMAScript 표준문서의 6번째 개정판 문서에 있는 표준 스펙이다.  
+	  ES5는 2011년에 나왔고, ES6은 2015년에 나왔는데 내용이 2배 이상 많아졌음. 
+	  ES7은 2016년에 나왔지만 ES6과 ES7은 바뀐것이 거의 없음. 
+	  그래서 일반적으로 ES7이라고 부르지 않고 ES6이라고 부름.
+*/
+	function myFunction_1() {
+	//	console.log("확인용 : " + document.getElementById("num1").value );
+		
+		const num1 = document.getElementById("num1").value; // "5"
+		/* const num1 = document.getElementById("num2").value; // "5" */
+		// Uncaught SyntaxError: Identifier 'num1' has already been declared
+		// --- const num1 이 이미 선언되어져 있으므로 또 선언하는 것은 오류이다.
+		num1 = document.getElementById("num1").value;
+		// Uncaught TypeError: Assignment to constant variable.
+		// --- num1 은 const 타입이므로 num1 에 이미 값이 할단된 이후에 또 값을 할당하는 것은 오류이다.
+		// --- 그러므로 const는 자바스크립트 소스상에 1번만 값을 할당해줄수 있다.
+		const num2 = document.getElementById("num2").value; // "2"
+		const sum = num1 + num2; // "52"
+		/* 웹은 숫자를 넣어주더라도 String 타입으로 받아들인다. */
+		document.getElementById("sum").innerHTML = sum;
+	}
+	
+	
+	
+	function myFunction_3() {
+		//	console.log("확인용 : " + document.getElementById("num1").value );
+			
+			var num3 = document.getElementById("num3").value; // "5"
+			var num4 = document.getElementById("num4").value; // "2"
+			var num3 = Number(num3) - Number(num4); // 이미 선언되어진 num3을 다시 var num3 으로 선언하여도 오류가 아님
+			/* 웹은 숫자를 넣어주더라도 String 타입으로 받아들인다. */
+			document.getElementById("minus").innerHTML = num3;
+			
+			var num3 = "안녕하세요?";
+			document.getElementById("greeting").innerHTML = num3;
+			
+			num3 = 1.2345; // var 로 선언되어진 변수는 재사용이 가능함!!
+			document.getElementById("float").innerHTML = num3;
+		
+			var num5;
+			num5 = 999;	// --- var 변수는 선언후에 값을 넣어줘도 가능하다.!! ---
+			document.getElementById("point").innerHTML = num5;
+			
+			var num6=100;
+			var num7=200;
+			document.getElementById("view-1").innerHTML = num6+"+"+num7+"="+(num6+num7);	//100+200=300
+			// 또는
+			document.getElementById("view-2").innerHTML = `${num6}+${num7}=${num6+num7} `; //ES6(ECMAScript 6) 표기법
+			// 키보드 숫자 1 왼쪽에 있는 ` 을 백틱이라고 부른다.
+	}
+		
+	
+
+</script>
+
+
+</body>
+</html>

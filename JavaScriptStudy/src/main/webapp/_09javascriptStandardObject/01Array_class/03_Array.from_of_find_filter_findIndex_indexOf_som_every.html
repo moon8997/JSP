@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ES6에서 새로 도입된 Array 관련 메소드에 대해서 알아봅니다</title>
+
+<style type="text/css">
+
+	table, th, td {border: solid 1px gray;}
+	table {border-collapse: collapse; 
+	       width: 150px;} 
+	td {text-align: center;}            
+
+</style>
+
+</head>
+<body>
+
+<h2>내가 좋아하는 과일</h2>
+<div id="div_fruit" style="display: flex;"> 
+	<ul style="list-style-type: none; color:red;">
+		<li>사과</li>
+		<li>딸기</li>
+		<li>수박</li>
+		<li>참외</li>
+	</ul>
+	<ul style="list-style-type: none; color:blue;">
+		<li>apple</li>
+		<li>strawberry</li>
+		<li>watermelon</li>
+		<li>melon</li>
+	</ul>
+</div>
+
+<div>
+	<table id="tbl">
+		<thead>
+			<tr>
+				<th>성명</th>
+				<th>점수</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>홍길동</td>
+				<td>90</td>
+			</tr>
+			<tr>
+				<td>엄정화</td>
+				<td>100</td>
+			</tr>
+			<tr>
+				<td>이순신</td>
+				<td>50</td>
+			</tr>
+			<tr>
+				<td>유관순</td>
+				<td>70</td>
+			</tr>
+			<tr>
+				<td>김유신</td>
+				<td>80</td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td>총점1</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>총점2</td>
+				<td></td>
+			</tr>
+		</tfoot>	
+	</table>
+</div> 
+
+<br/>
+<button type="button" id="btnPass">합격자명단_1</button>&nbsp;<button type="button" id="btnPass_2">합격자명단_2</button>
+<div id="pass"></div>
+
+<hr style="background-color: gold; height: 2px; border: none;">
+
+<div id="display_all_fruit"></div>
+<div>
+	최저가격:&nbsp;<input type="text" id="minPrice" /> - 최고가격:&nbsp;<input type="text" id="maxPrice" />
+	<button type="button" id="btnSearch">검색</button>
+</div>
+<div id="display_search_fruit"></div>
+
+
+
+<script type="text/javascript">
+
+	const li_List_1 = document.querySelectorAll("div#div_fruit > ul:first-child > li");
+	
+	console.log(li_List_1); // NodeList(4) [li, li, li, li]
+	// li_List_1 은 4개의 li 태그를 가지고 있는 NodeList(배열과 비슷한 구조)이다.
+	
+	const fruit_Arr_1 = [];
+	for(let li of li_List_1) {
+		fruit_Arr_1.push(li.innerText);
+	}
+	
+	console.log(fruit_Arr_1); // (4) ['사과', '딸기', '수박', '참외']
+	
+	/////////////////////////////////////////////////////////////////////////////////////
+	
+	// ---- ***** Array.from() ***** ---- //
+	// ES6에서 새로 도입된 메소드로서 유사 배열 객체나 반복 가능한 객체를 실제 배열로 변환시켜주는 것이다.
+	
+	const li_List_2 = document.querySelectorAll("div#div_fruit > ul:last-child > li");
+	
+	const fruit_Arr_2 = Array.from(li_List_2);
+	// Array.from(인수1); 에서 인수1은 배열로 변환하고자 하는 유사 배열 객체나 반복 가능한 객체가 들어온다.
+	// 즉, Array.from(li_List_2); 은 NodeList(배열과 비슷한 구조)인 li_List_2를 실제 배열로 변환하여 준다.
+	console.log(fruit_Arr_2);  // (4) [li, li, li, li]
+	
+	const fruit_Arr_3 = fruit_Arr_2.map(item => item.innerText);
+	// fruit_Arr_2 은 배열이 되었으므로 배열 메소드인 map()을 사용할 수 있게 된다. 
+	// 매개변수가 item 1개이므로 (item) 대신에 ()를 생략한 item 을 사용하였으며, 처리할 내용이 return 만 있으므로 {} 및 return 을 생략하였다. 
+	
+	console.log(fruit_Arr_3);  // (4) ['apple', 'strawberry', 'watermelon', 'melon']
+	
+	///////////////////////////////////////////////////////////////////////////////////////
+	
+	const li_List_3 = document.querySelectorAll("div#div_fruit > ul:first-child > li");
+	
+	const fruit_Arr_4 = Array.from(li_List_3, item => item.innerText);
+	// Array.from(인수1, 인수2); 에서 인수1은 배열로 변환하고자 하는 유사 배열 객체나 반복 가능한 객체가 들어온다.
+	// Array.from(인수1, 인수2); 에서 인수2는 배열 메소드인 map() 메소드와 기능이 흡사한 배열 요소에 대한 1:1 매핑 함수가 들어온다.  
+	
+	console.log(fruit_Arr_4);  // (4) ['사과', '딸기', '수박', '참외']
+	
+	////////////////////////////////////////////////////////////////////////////////////////
+	
+	// ==== td 태그에 나열된 점수를 가지고 와서 합계 구하기 ==== // 
+	
+	const td_List_point = document.querySelectorAll("table#tbl > tbody > tr > td:last-child");
+	
+	console.log(td_List_point); // NodeList(5) [td, td, td, td, td]
+	
+	const arr_td = Array.from(td_List_point);
+	console.log(arr_td);     // (5) [td, td, td, td, td]
+	
+	const arr_point = arr_td.map(item => Number(item.innerText));
+	console.log(arr_point);  // (5) [90, 100, 80, 70, 50]
+	
+	let sum = 0;
+	for(let item of arr_point) {
+		sum += item;
+	}
+	console.log(sum); // 390 
+	
+	document.querySelector("table#tbl > tfoot > tr:first-child > td:last-child").innerHTML = `<span style='color:red'>${sum}</span>`;   
+	
+	////////////////////////////////////////////////////////////////////////////////////////////
+	
+	const td_List_point2 = document.querySelectorAll("table#tbl > tbody > tr > td:last-child");
+    
+	const arr_point2 = Array.from(td_List_point2, item => Number(item.innerText));
+	
+	sum = 0;
+	for(let item of arr_point2) {
+		sum += item;
+	}
+	
+	document.querySelector("table#tbl > tfoot > tr:last-child > td:last-child").innerHTML = `<span style='color:blue'>${sum}</span>`;
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
+	
+	// ---- ***** Array.of() ***** ---- //
+	// ES6에서 새로 도입된 메소드로서 전달받은 모든 인수를 배열의 요소로 하는 배열로 만들어 준다.
+	const arr_digit = Array.of(1,2,3,4,5,6,7);
+	console.log(arr_digit);  // (7) [1, 2, 3, 4, 5, 6, 7]
+	
+	
+	
+	////////////////////////////////////////////////////////////////////////////////////////////////
+		
+	// ---- ***** 배열명.find() ***** ---- //
+	// ES6에서 새로 도입된 메소드로서 판별함수의 조건에 만족하는 배열요소가 있으면 첫번째 배열요소를 리턴 시켜주고 끝내고, 
+	// 판별함수의 조건에 만족하는 배열요소가 없으면 undefinded
+	
+	const fruit_Arr_5 = [ {name:'사과', price:1000}
+	                     ,{name:'딸기', price:2000}
+	                     ,{name:'사과', price:3000} ];
+
+/*	
+	const apple = fruit_Arr_5.find(function(item, index, array) {  // index, array 은 생략가능하다.
+					if(item.name === '사과') // == 은 값만 일치하면 true, === 은 값 및 데이터타입도 일치해야만 true 
+			                                // 10 == "10" 은 true , 10 === "10" 은 false, 10 === 10 은 true 임 
+		   			return item;
+				  });
+*/				  
+//  또는 	
+    const apple = fruit_Arr_5.find( item => item.name === '사과');
+    // 판별함수의 조건에 만족하는 첫번째 배열요소를 리턴 시켜주고 끝내고, 판별함수의 조건에 만족하는 배열요소가 없으면 undefinded
+	
+	console.log(apple);       // {name:'사과', price:1000}
+	console.log(apple.name);  // 사과
+	console.log(apple.price); // 1000
+	
+	const watermelon = fruit_Arr_5.find( item => item.name === '수박');
+	// 판별함수의 조건에 만족하는 첫번째 배열요소를 리턴 시켜주고 끝내고, 판별함수의 조건에 만족하는 배열요소가 없으면 undefinded
+	console.log(watermelon);  // undefinded
+	
+	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	// ---- ***** 배열명.filter() ***** ---- //
+	// 판별함수의 조건에 만족하는 배열요소가 있으면 모든 배열요소를 담은 배열로 리턴 시켜주고,
+	// 판별함수의 조건에 만족하는 배열요소가 없으면 빈배열 [] 을 리턴시켜준다. 
+
+/*	
+	const apple_Arr = fruit_Arr_5.filter(function(item, index, array) { // index, array 는 생략가능하다. 
+		                                   if(item.name === '사과') 
+		                	                  return item;
+	                  });
+*/	
+//  또는 	
+    const apple_Arr = fruit_Arr_5.filter(item => item.name === '사과');
+		
+	console.log(apple_Arr); // [ {name:'사과', price:1000}, {name:'사과', price:3000} ]
+	
+	for(let apple of apple_Arr) {
+		console.log(apple.name + " -> " + apple.price);  
+		// 사과 -> 1000
+		// 사과 -> 3000
+	}
+	
+	for(let apple of apple_Arr) {
+		console.log(`${apple.name} -> ${apple.price}`);  
+		// 사과 -> 1000
+		// 사과 -> 3000
+	}
+	
+	const watermelon_Arr = fruit_Arr_5.filter(item => item.name === '수박');
+	
+	console.log(watermelon_Arr); // []
+	
+	
+	////////////////////////////////////////////////////////////////////////////////////////
+	
+	// ===== 점수가 80 이상인 사람들만 가져와서 웹브라우저 화면에 출력해봅니다. -1 첫번째 방법 ===== //
+	
+	const td_list_jumsu = document.querySelectorAll("table#tbl > tbody > tr > td:last-child");
+	
+	const td_arr_jumsu = Array.from(td_list_jumsu);
+	
+	console.log(td_arr_jumsu); // (5) [td, td, td, td, td]
+	
+	for(let item of td_arr_jumsu) {
+		console.log(item.innerText);
+		/*
+		  배열요소.innerText   배열인덱스
+		     90                 0
+		     100                1
+		     50                 2
+		     70                 3
+		     80                 4 
+		*/
+	}
+	
+	const index_Arr_80_gt = [];
+	
+	const td_Arr_80_gt = td_arr_jumsu.filter( (item, index) => {  if ( Number(item.innerText) >= 80 ) {
+		                                                          console.log(index); // 0  1  4
+		                                                          index_Arr_80_gt.push(index);
+		                                                          return item;
+	                                                            }
+	                                                         }); 
+	
+	console.log(td_Arr_80_gt);    // [td, td, td]
+	console.log(index_Arr_80_gt); // (3) [0, 1, 4]
+		
+	const tr_list = document.querySelectorAll("table#tbl > tbody > tr");
+	const tr_arr = Array.from(tr_list);
+	for(let item of tr_arr) { 
+		console.log(item);   // 배열요소         배열인덱스
+		                     // <tr>...</tr>     0
+		                     // <tr>...</tr>     1
+		                     // <tr>...</tr>     2
+		                     // <tr>...</tr>     3
+		                     // <tr>...</tr>     4 
+	}
+	
+	const tr_arr_pass = [];
+	
+	for(let i=0; i<index_Arr_80_gt.length; i++) {
+		tr_arr_pass.push("<tr>"+tr_arr[index_Arr_80_gt[i]].innerHTML+"</tr>");
+	}
+	
+	console.log(tr_arr_pass);
+	/*
+	 (3) ['<tr>\n\t\t\t\t<td>홍길동</td>\n\t\t\t\t<td>90</td>\n\t\t\t</tr>', '<tr>\n\t\t\t\t<td>엄정화</td>\n\t\t\t\t<td>100</td>\n\t\t\t</tr>', '<tr>\n\t\t\t\t<td>김유신</td>\n\t\t\t\t<td>80</td>\n\t\t\t</tr>']
+	*/
+	
+	
+	for(let item of tr_arr_pass) {
+		console.log(item);
+	}
+	/*
+	    <tr>
+			<td>홍길동</td>
+			<td>90</td>
+		</tr>
+		
+		<tr>
+		    <td>엄정화</td>
+		    <td>100</td>
+	    </tr>
+	
+	    <tr>
+	        <td>김유신</td>
+	        <td>80</td>
+	    </tr>
+	*/
+	
+	console.log( tr_arr_pass.join("") );
+	/*
+	    <tr>
+		    <td>홍길동</td>
+			<td>90</td>
+		</tr><tr>
+			<td>엄정화</td>
+			<td>100</td>
+		</tr><tr>
+			<td>김유신</td>
+			<td>80</td>
+		</tr>
+	*/
+	
+	const btnPass = document.getElementById("btnPass");
+	
+	btnPass.addEventListener('click', ()=>{
+		document.getElementById("pass").innerHTML = `<table>${tr_arr_pass.join("")}</table>`;
+	});
+	
+	
+	// ===== 점수가 80 이상인 사람들만 가져와서 웹브라우저 화면에 출력해봅니다. -2 두번째 방법 children===== //
+	
+	document.getElementById("btnPass_2").addEventListener('click', ()=>{
+		
+		const tr_list =  document.querySelectorAll("#tbl > tbody > tr"); 
+		
+		let html = ``;
+		tr_list.forEach( item => {
+			html += "<tr>"
+			if( item.children[1].innerText >= 80){
+				html += "<td>"+item.children[0].innerHTML+"</td>" + "<td>"+item.children[1].innerHTML+"</td>";
+			}
+			html += "</tr>"
+		});
+		
+	//	console.log(html);
+		document.getElementById("pass").innerHTML = `<table>${html}</table>`;
+	});
+	
+	
+	///////////////////////////////////////////////////////////////////////////////////////////
+	
+	// === 객체배열에서 price(가격)대로 물건 검색하기 === // 
+	const fruit_Arr_6 = [ {name:'사과',  price:1000},
+		                  {name:'딸기',  price:2000},
+		                  {name:'오렌지', price:1500},
+		                  {name:'포도',  price:2500},
+		                  {name:'키위',  price:3000} ];
+	
+	let html = ``;
+	
+	for(let item of fruit_Arr_6) {
+		html += `<li>${item.name} ${item.price}원</li>`;
+	}
+	
+	document.getElementById("display_all_fruit").innerHTML = `<ul>${html}</ul>`;
+	
+	const btnSearch = document.getElementById("btnSearch");
+	
+	btnSearch.addEventListener('click', () => {
+		
+		let minPrice = document.getElementById("minPrice").value;
+		let maxPrice = document.getElementById("maxPrice").value;
+		
+		if(minPrice.trim() == "" || maxPrice.trim() == "") {
+			document.getElementById("display_search_fruit").innerHTML = `<span style='color:red;'>최저가격 및 최고가격을 입력하세요!!</span>`; 
+			return;  // 종료 
+		}
+		
+		minPrice = Number(minPrice);
+		maxPrice = Number(maxPrice);
+		
+		if(minPrice*0 != 0 || maxPrice*0 != 0) {
+			document.getElementById("display_search_fruit").innerHTML = `<span style='color:red;'>최저가격 및 최고가격은 숫자로만 입력하세요!!</span>`; 
+			return;  // 종료 
+		}
+		
+		if( minPrice > maxPrice ) {
+			document.getElementById("display_search_fruit").innerHTML = `<span style='color:red;'>최저가격은 최고가격 보다 같거나 작아야 합니다!!</span>`; 
+			return;  // 종료
+		}
+		
+	//	const fruit_Arr_search = fruit_Arr_6.filter( item => { if(minPrice <= item.price && item.price <= maxPrice) return item;} );
+	//  또는 
+	    const fruit_Arr_search = fruit_Arr_6.filter( item => minPrice <= item.price && item.price <= maxPrice );
+	
+	    console.log(fruit_Arr_search); // [{…}, {…}, {…}]
+	    
+	    let html = ``;
+	    if(fruit_Arr_search.length == 0) {
+	    	html = "검색조건에 만족하는 과일은 없습니다.";
+	    }
+	    else {
+	    	for(let item of fruit_Arr_search) {
+	    		html += `<li>${item.name} ${item.price}원</li>`;
+	    	}
+	    }
+	    
+	    document.getElementById("display_search_fruit").innerHTML = html;
+	
+	});
+	
+	
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
+	// ---- ***** 배열명.findIndex() ***** ---- //
+	// ES6에서 새로 도입된 메소드로서 판별함수의 조건에 만족하는 배열요소가 있으면 첫번째 배열요소의 인덱스번호만 리턴 시켜주고 끝내고, 
+	// 판별함수의 조건에 만족하는 배열요소가 없으면 -1 이 나온다.
+	
+/*	
+	const index = fruit_Arr_6.findIndex( function(item, index, array) { 
+		                                       if(item.price > 1000)
+		                                       return item;} );
+*/
+//  또는      
+    let index = fruit_Arr_6.findIndex(item => item.price > 1000);
+    
+	console.log("index : " + index); // index : 1
+	
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
+	// ---- ***** 배열명.indexOf(찾을요소, 검색출발인덱스번호) ***** ---- //
+	// 배열명에서 찾을요소와 일치하는 배열요소가 있으면 첫번째 배열요소의 인덱스번호만 리턴 시켜주고 끝내고, 배열요소가 없으면 -1 이 나온다.
+	
+	const subject_arr = ["자바","오라클","HTML","CSS","javascript","오라클","자바","HTML","오라클"];
+	
+	index = subject_arr.indexOf("오라클", 0); // 검색출발인덱스번호를 생략하면 0 으로 된다. 
+	console.log(`index 번호 : ${index}`); // index 번호 : 1
+	
+	index = subject_arr.indexOf("안녕하세요", 0); // 검색출발인덱스번호를 생략하면 0 으로 된다. 
+	console.log(`index 번호 : ${index}`); // index 번호 : -1 
+	
+	
+	// 배열요소 "오라클" 의 모든 index 번호를 찾아서 배열로 만들기 //
+	const index_arr = [];
+	index = subject_arr.indexOf("오라클"); //  1 
+	while(index != -1) {
+		index_arr.push(index); // [1] [1,5] [1,5,8]
+		index = subject_arr.indexOf("오라클", index+1); // 5  8  -1
+	}
+	
+	console.log(index_arr);  // (3) [1, 5, 8]
+	
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////////
+	/*
+	const fruit_Arr_6 = [ {name:'사과',  price:1000},
+		                  {name:'딸기',  price:2000},
+		                  {name:'오렌지', price:1500},
+		                  {name:'포도',  price:2500},
+		                  {name:'키위',  price:3000} ];
+	*/
+	
+	// ---- ***** 배열명.some() ***** ---- //
+	// 배열명에서 판별함수의 조건에 만족하는 배열요소가 하나라도 있으면 true 를 리턴 시켜주고 조건검사를 중지한다.
+	// 배열명에서 판별함수의 조건에 만족하는 배열요소가 하나라도 없으면 false 를 리턴 시켜준다.
+	
+	// 배열 fruit_Arr_6 에서 price 가 2000 이상인 배열요소가 있는지 검사한다.  
+	let bool = fruit_Arr_6.some(function(item, index, array) {   // index, array 은 생략 가능하다.
+		                              if(item.price >= 2000) {
+                                         console.log(item.name); // 딸기
+                                         return true;
+	                                  } 
+	                             });
+	
+	// 또는
+	bool = fruit_Arr_6.some(item => { if(item.price >= 2000) {
+						                 console.log(item.name); // 딸기
+						                 return true;
+						               } 
+						            });
+	
+	console.log(bool); // true
+	
+	bool = fruit_Arr_6.some( item => item.price >= 2000);
+	console.log(bool); // true
+	
+	
+	
+	// ---- ***** 배열명.every() ***** ---- //
+	// 배열명에서 판별함수의 조건에 만족하는 배열요소가 하나라도 없으면 false 를 리턴 시켜주고 조건검사를 중지한다.
+	// 배열명에서 판별함수의 조건에 만족하는 배열요소가 모두 존재해야만 true 를 리턴 시켜준다.
+	
+	console.log("=== 배열명.every() 알아보기 ===");
+	
+	// 배열 fruit_Arr_6 에서 price 가 모두 1000 이상인지 검사한다.
+	bool = fruit_Arr_6.every(function(item, index, arrary) {  // index, array 은 생략 가능하다.
+		                           if(item.price >= 1000) {
+                                       console.log(item.name); // 사과 딸기 오렌지 포도 키위
+                                       return true;
+	                               }
+	                               else {
+	                                   	 console.log(item.name+"의 가격은 1000 미만 입니다.");
+	                               }
+	                         });
+	
+	// 또는 
+	bool = fruit_Arr_6.every( item => { if(item.price >= 1000) {
+									        console.log(item.name); // 사과 딸기 오렌지 포도 키위
+									        return true;
+									    }
+									    else {
+									       	 console.log(item.name+"의 가격은 1000 미만 입니다.");
+									    }
+								});
+	
+	console.log(bool); // true
+	
+	bool = fruit_Arr_6.every(item => item.price >= 1000);
+	console.log(bool); // true
+	
+	
+	// 배열 fruit_Arr_6 에서 price 가 모두 9000 이상인지 검사한다.
+	bool = fruit_Arr_6.every( item => { if(item.price >= 9000) {
+                                            console.log(item.name);  
+                                            return true;
+	                                    }
+	                                    else {
+	                                       	 console.log(item.name+"의 가격은 9000 미만 입니다."); // 사과의 가격은 9000 미만 입니다. 
+	                                        }
+	                                  });
+	
+	console.log(bool); // false
+	
+	bool = fruit_Arr_6.every(item => item.price >= 9000);
+	console.log(bool); // false
+	
+</script>
+
+</body>
+</html>
